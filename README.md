@@ -1,16 +1,115 @@
-# React + Vite
+# 📈 AssetMonitor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AssetMonitor is a modern React-based investment dashboard designed to help users track and visualize their portfolio performance over different time periods.
 
-Currently, two official plugins are available:
+The application provides daily, monthly, and yearly investment insights through interactive charts, performance metrics, and historical analytics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- 📊 Track investment performance over time
+- 📅 View daily, monthly, and yearly analytics
+- 💹 Visualize trends with interactive charts
+- 🔍 Filter and analyze investment data
+- 📈 Monitor portfolio growth and returns
+- 📱 Responsive design for desktop and mobile devices
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend:** React
+- **Build Tool:** Vite
+<!-- TODO: Add later
+- **Styling:** CSS / Tailwind CSS _(update if applicable)_
+- **Charts:** Recharts / Chart.js _(update based on your choice)_
+- **State Management:** Context API / Redux _(update if applicable)_
+  -->
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js (v18 or later)
+- npm or yarn
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/<your-github-username>/asset-monitor.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd asset-monitor
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open your browser and visit:
+
+```text
+http://localhost:5173
+```
+
+<!-- TODO: Add later
+## 📂 Project Structure
+
+```text
+asset-monitor/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── hooks/
+│   ├── utils/
+│   ├── App.jsx
+│   └── main.jsx
+├── .gitignore
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+## 🗺️ Roadmap
+
+* [ ] User authentication
+* [ ] Portfolio management
+* [ ] Investment CRUD operations
+* [ ] Advanced filtering and search
+* [ ] Export reports to CSV/PDF
+* [ ] Dark mode support
+* [ ] Real-time market data integration
+* [ ] Performance comparison metrics
+
+## 🤝 Contributing
+
+Contributions, suggestions, and feedback are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+-->
+
+Built with ❤️ using React and Vite.

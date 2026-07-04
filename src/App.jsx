@@ -1,7 +1,9 @@
+import Dashboard from "./pages/Dashboard";
+
 function App() {
   return (
     <>
-      <h1>Asset Monitor App</h1>
+      <Dashboard />
     </>
   );
 }

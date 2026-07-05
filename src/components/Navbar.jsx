@@ -1,22 +1,38 @@
 // src/components/Navbar.jsx
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeLanguage,
+  selectLanguage,
+  selectTheme,
+  toggleTheme,
+} from "../features/Preferences/preferencesSlice";
+
+const languages = [
+  { code: "en", label: "English" },
+  { code: "hi", label: "Hindi" },
+];
 
 function Navbar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const theme = "light";
-  const language = "eng";
+  const theme = useSelector(selectTheme);
+  const language = useSelector(selectLanguage);
 
   const [langOpen, setLangOpen] = useState(false);
 
-  const languages = [
-    { code: "en", label: "English" },
-    { code: "hi", label: "Hindi" },
-  ];
+  const changeTheme = () => {
+    dispatch(toggleTheme());
+  };
+
+  const onLanguageChange = (code) => {
+    dispatch(changeLanguage(code));
+  };
 
   function handleLogin() {
-    sessionStorage.clear();
+    // sessionStorage.clear();
     navigate("/login");
   }
 
@@ -40,10 +56,10 @@ function Navbar() {
         {/* Theme toggle */}
         <button
           style={styles.iconBtn}
-          //   onClick={onThemeToggle}
+          onClick={changeTheme}
           title="Toggle theme"
         >
-          {theme === "dark" ? "☀️" : "🌙"}
+          {theme === "light" ? "🌙" : "☀️"}
         </button>
 
         {/* Language dropdown */}
@@ -65,7 +81,7 @@ function Navbar() {
                     fontWeight: language === l.code ? 600 : 400,
                   }}
                   onClick={() => {
-                    // onLanguageChange(l.code);
+                    onLanguageChange(l.code);
                     setLangOpen(false);
                   }}
                 >

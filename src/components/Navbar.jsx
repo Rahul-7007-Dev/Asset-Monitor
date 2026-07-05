@@ -8,6 +8,11 @@ import {
   selectTheme,
   toggleTheme,
 } from "../features/Preferences/preferencesSlice";
+import {
+  isAuthenticated,
+  logout,
+  user,
+} from "../features/auth/authenticationSlice";
 
 const languages = [
   { code: "en", label: "English" },
@@ -20,6 +25,8 @@ function Navbar() {
 
   const theme = useSelector(selectTheme);
   const language = useSelector(selectLanguage);
+  const isLoggedIn = useSelector(isAuthenticated);
+  const userData = useSelector(user);
 
   const [langOpen, setLangOpen] = useState(false);
 
@@ -32,27 +39,40 @@ function Navbar() {
   };
 
   function handleLogin() {
-    // sessionStorage.clear();
     navigate("/login");
   }
+
+  const handleLogout = () => {
+    dispatch(logout());
+    // sessionStorage.clear();
+    navigate("/login");
+  };
 
   return (
     <nav style={styles.nav}>
       <div style={styles.brand}>💰 Asset Tracker</div>
 
-      <div style={styles.links}>
-        <NavLink to="/" end style={navLinkStyle}>
-          Dashboard
-        </NavLink>
-        <NavLink to="/add-entry" style={navLinkStyle}>
-          Add Entry
-        </NavLink>
-        <NavLink to="/history" style={navLinkStyle}>
-          History
-        </NavLink>
-      </div>
+      {isLoggedIn ? (
+        <div style={styles.links}>
+          <NavLink to="/" end style={navLinkStyle}>
+            Dashboard
+          </NavLink>
+          <NavLink to="/add-entry" style={navLinkStyle}>
+            Add Entry
+          </NavLink>
+          <NavLink to="/history" style={navLinkStyle}>
+            History
+          </NavLink>
+        </div>
+      ) : null}
 
       <div style={styles.actions}>
+        {/* welcome user */}
+        {isLoggedIn && (
+          <span style={{ color: "#fff", fontSize: "15px" }}>
+            👤 &nbsp; {userData?.username}
+          </span>
+        )}
         {/* Theme toggle */}
         <button
           style={styles.iconBtn}
@@ -92,10 +112,16 @@ function Navbar() {
           )}
         </div>
 
-        {/* Login */}
-        <button style={styles.loginBtn} onClick={handleLogin}>
-          Login
-        </button>
+        {/* Login & Logout */}
+        {!isLoggedIn ? (
+          <button style={styles.loginBtn} onClick={handleLogin}>
+            Login
+          </button>
+        ) : (
+          <button style={styles.loginBtn} onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );

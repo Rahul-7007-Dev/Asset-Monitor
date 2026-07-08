@@ -6,13 +6,21 @@ import AddEntry from "./pages/AddEntry";
 import History from "./pages/History";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import PublicRoute from "./components/PublicRoute.jsx";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/"
           element={

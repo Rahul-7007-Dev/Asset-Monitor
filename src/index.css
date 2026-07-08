@@ -1,1 +1,4 @@
 @import "tailwindcss";
+
+/* Override the default dark variant */
+@custom-variant dark (&:where(.dark, .dark *));

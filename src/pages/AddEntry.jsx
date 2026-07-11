@@ -52,6 +52,7 @@ const AddEntry = () => {
           <input
             type="date"
             value={date}
+            max={new Date().toISOString().split("T")[0]}
             onChange={(e) => setDate(e.target.value)}
             className="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:outline-none focus:border-sky-400 transition-colors text-slate-700"
           />

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchAssetData } from "../services/assetService";
 
 const useAssetData = () => {
   const [data, setData] = useState([]);
@@ -8,10 +9,7 @@ const useAssetData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = import.meta.env.VITE_SHEET_URL;
-
-        const response = await fetch(url);
-        const csvText = await response.text();
+        const csvText = await fetchAssetData();
 
         const rows = csvText.trim().split("\n");
         const headers = rows[0].split(",");

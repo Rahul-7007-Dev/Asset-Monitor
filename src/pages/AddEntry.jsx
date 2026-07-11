@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { addAssetEntry } from "../services/assetService";
 
 const AddEntry = () => {
   const [date, setDate] = useState("");
@@ -18,10 +19,7 @@ const AddEntry = () => {
     setSuccess(null);
 
     try {
-      await fetch(import.meta.env.VITE_APPS_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ date, value: Number(value) }),
-      });
+      await addAssetEntry(date, Number(value));
       setSuccess("Entry added successfully!");
       setDate("");
       setValue("");

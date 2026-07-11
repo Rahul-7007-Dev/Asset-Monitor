@@ -11,11 +11,20 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogin = () => {
+    if (!username || !password) {
+      setError("Please enter both username and password");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
     const userData = {
       id: nanoid(),
       username: USERNAME,
@@ -25,52 +34,75 @@ const Login = () => {
       navigate("/");
     } else {
       setError("Invalid credentials");
+      setLoading(false);
     }
   };
-  return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Sign in to your account
-            </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
-              <div>
-                <input
-                  type="text"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="username"
-                  required
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              {error && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                  Invalid Credential
-                </p>
-              )}
 
-              <button
-                onClick={handleLogin}
-                className="w-full border-1 text-dark bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 dark:text-white"
-              >
-                Sign in
-              </button>
-            </form>
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleLogin();
+  };
+
+  return (
+    <div className="min-h-[calc(100vh-56px)] bg-slate-50 flex items-center justify-center px-4">
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-10">
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-sky-100 mb-4">
+            <span className="text-2xl">💰</span>
           </div>
+          <h1 className="text-2xl font-bold text-slate-800">Asset Tracker</h1>
+          <p className="text-slate-500 text-sm mt-1">
+            Sign in to access your dashboard
+          </p>
         </div>
+
+        {/* Username */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Username
+          </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Enter your username"
+            className="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:outline-none focus:border-sky-400 transition-colors text-slate-700"
+          />
+        </div>
+
+        {/* Password */}
+        <div className="mb-8">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Enter your password"
+            className="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:outline-none focus:border-sky-400 transition-colors text-slate-700"
+          />
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
+            ⚠️ {error}
+          </div>
+        )}
+
+        {/* Submit */}
+        <button
+          onClick={handleLogin}
+          disabled={loading}
+          className="w-full py-4 bg-sky-500 hover:bg-sky-600 disabled:bg-sky-300 text-white font-semibold text-base rounded-xl transition-colors"
+        >
+          {loading ? "Signing in..." : "Sign In"}
+        </button>
       </div>
-    </section>
+    </div>
   );
 };
 
